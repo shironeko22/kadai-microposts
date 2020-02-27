@@ -6,5 +6,5 @@ class Micropost < ApplicationRecord
   has_many :favorites
   has_many :favorite_froms, through: :favorites, source: :user
   has_many :reverses_of_favorite, class_name: "Favorite", foreign_key: "micropost_id"
-  has_many :favorite_tos, through: :reverses_of_favorite, source: :micropost
+  has_many :likes, through: :reverses_of_favorite, source: :micropost
 end

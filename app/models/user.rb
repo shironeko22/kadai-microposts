@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
   has_many :followers, through: :reverses_of_relationship, source: :user
   has_many :favorites
-  has_many :favorite_tos, through: :favorites, source: :micropost
+  has_many :likes, through: :favorites, source: :micropost
   has_many :reverses_of_favorite, class_name: "Favorite", foreign_key: "micropost_id"
   has_many :favorite_froms, through: :reverses_of_favorite, source: :user
   
@@ -44,7 +44,7 @@ class User < ApplicationRecord
     favorite.destroy if favorite
   end
   
-  def favorite_to?(a_post)
-    self.favorite_tos.include?(a_post)
+  def like?(a_post)
+    self.likes.include?(a_post)
   end
 end
